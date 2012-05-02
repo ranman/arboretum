@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
+	<meta http-equiv=Content-Type content=text/html;charset=utf-8 />
+	<meta http-equiv=X-UA-Compatible content=IE=Edge;chrome=1 />
 	<!--<link rel="stylesheet" href="style.css">-->
 	<style type="text/css">
+#iboga,#kratom,#peyote,#yopo,#salvia {
+	width: 150px;
+	height: 150px;
+	background-color: white;
+}
 body {
 	background: #000;
 	position: relative;
-	width: 80%;
+	width: 1280px;
 	height: 800px;
 	margin: 0 auto;
 	overflow: hidden;
@@ -18,10 +23,14 @@ body {
 	height: 100%;
 }
 #randomTripButton {
-	margin-top: 20%;
+	margin-top: 5%;
 	width: 20%;
-	height: 10em;
-	margin-bottom: 5em;
+	height: 20%;
+	margin-bottom: 3em;
+}
+#otherButtons {
+	width: 100%;
+
 }
 #plantpage {
 	width: 100%;
@@ -41,7 +50,7 @@ body {
 #plant {
 	display: none;
 	margin: 0 auto;
-	padding-top: 10%;
+	padding-top: 5%;
 	width: 50%;
 	color: red;
 }
@@ -58,112 +67,25 @@ body {
 	<script src="plants.json"></script>
 </head>
 <body>
-<section id="mainpage">
-	<button id="randomTripButton">Random</button>
-	<div id="otherButtons">
-		<button id="iboga">Iboga</button>
-		<button id="kratom">Kratom</button>
-		<button id="peyote">Peyote</button>
-		<button id="salvia">Salvia</button>
-		<button id="yopo">Yopo</button>
+<section id=mainpage>
+	<button id=randomTripButton>Random</button>
+	<div id=otherButtons>
+		<button id=iboga><img src=images/iboga.png /></button>
+		<button id=kratom><img src=images/kratom.png /></button>
+		<button id=peyote><img src=images/peyote.png /></button>
+		<button id=salvia><img src=images/salvia.png /></button>
+		<button id=yopo><img src=images/yopo.png /></button>
 	</div>
 </section>
-<section id="plantpage" class="hidden">
-	<div id="trip"></div>
-	<div id="plant"></div>
-	<button id="again">Again?</button>
-	<button id="back">Back?</button>
+<section id=plantpage class=hidden>
+	<div id=trip></div>
+	<div id=plant></div>
+	<button id=again>Again?</button>
+	<button id=back>Back?</button>
 </section>
-<script type="text/javascript">
-(function($) {
-    
-    function shuffle(a) {
-        var i = a.length, j;
-        while (i) {
-            var j = Math.floor((i--) * Math.random());
-            var t = a[i];
-            a[i] = a[j];
-            a[j] = t;
-        }
-    }
-    
-    function randomAlphaNum() {
-        var rnd = Math.floor(Math.random() * 62);
-        if (rnd >= 52) return String.fromCharCode(rnd - 4);
-        else if (rnd >= 26) return String.fromCharCode(rnd + 71);
-        else return String.fromCharCode(rnd + 65);
-    }
-    
-    $.fn.rot13 = function() {
-        this.each(function() {
-            $(this).text($(this).text().replace(/[a-z0-9]/ig, function(chr) {
-                var cc = chr.charCodeAt(0);
-                if (cc >= 65 && cc <= 90) cc = 65 + ((cc - 52) % 26);
-                else if (cc >= 97 && cc <= 122) cc = 97 + ((cc - 84) % 26);
-                else if (cc >= 48 && cc <= 57) cc = 48 + ((cc - 43) % 10);
-                return String.fromCharCode(cc);
-            }));
-        });
-        return this;
-    };
-    
-    $.fn.scrambledWriter = function() {
-        this.each(function() {
-            var $ele = $(this), str = $ele.text(), progress = 0, replace = /[^\s]/g,
-                random = randomAlphaNum, inc = 3;
-            $ele.text('');
-            var timer = setInterval(function() {
-                $ele.text(str.substring(0, progress) + str.substring(progress, str.length).replace(replace, random));
-                progress += inc
-                if (progress >= str.length + inc) clearInterval(timer);
-            }, 100);
-        });
-        return this;
-    };
-    
-    $.fn.typewriter = function() {
-        this.each(function() {
-            var $ele = $(this), str = $ele.text(), progress = 0;
-            $ele.text('');
-            var timer = setInterval(function() {
-                $ele.text(str.substring(0, progress++) + (progress & 1 ? '_' : ''));
-                if (progress >= str.length) clearInterval(timer);
-            }, 10);
-        });
-        return this;
-    };
-    
-    $.fn.unscramble = function() {
-        this.each(function() {
-            var $ele = $(this), str = $ele.text(), replace = /[^\s]/,
-                state = [], choose = [], reveal = 25, random = randomAlphaNum;
-            
-            for (var i = 0; i < str.length; i++) {
-                if (str[i].match(replace)) {
-                    state.push(random());
-                    choose.push(i);
-                } else {
-                    state.push(str[i]);
-                }
-            }
-            
-            shuffle(choose);
-            $ele.text(state.join(''));
-            
-            var timer = setInterval(function() {
-                var i, r = reveal;
-                while (r-- && choose.length) {
-                    i = choose.pop();
-                    state[i] = str[i];
-                }
-                for (i = 0; i < choose.length; i++) state[choose[i]] = random();
-                $ele.text(state.join(''));
-                if (choose.length == 0) clearInterval(timer);
-            }, 60);
-        });
-        return this;
-    };
-})(jQuery);
+
+<script type=text/javascript>
+
 $(function() {
 	var $mainpage = $("#mainpage");
 	var $plantpage = $("#plantpage");
@@ -172,11 +94,12 @@ $(function() {
 	var $again = $("#again");
 	var $back = $("#back");
 	var map = ['salvia','kratom','yopo','iboga','peyote'];
+	/* function to generate a mapping of plants to #s */
 	var randomPlant = function randomPlant() {
 		return map[Math.floor(Math.random() * map.length)];
 	}
+	/* generate a random trip, removing them from the list after they're displayed */
 	var randomTrip = function randomTrip(plantStr) {
-		console.log(plantStr);
 		var plant = plants[plantStr];
 		var testimonial = plant.testimonials.pop();
 		if(testimonial === undefined) {
@@ -187,7 +110,6 @@ $(function() {
 		$trip.html(testimonial);
 		$trip.fadeIn(5000, function() {
 			$plant.html("<em>"+plant.species+"</em><p>"+plant.names.join(', ')+"<p>"+plant.long_desc+"<p>"+plant.short_desc);
-			$plant.typewriter();
 			$plant.slideDown('slow', function() {
 				$again.fadeIn();
 				$back.fadeIn();
@@ -217,7 +139,40 @@ $(function() {
 		randomTrip('salvia');
 		$plantpage.show(500);
 	});
+	$("#peyote").click(function() {
+		$mainpage.hide(500);
+		randomTrip('peyote');
+		$plantpage.show(500);
+	});
+	$("#kratom").click(function() {
+		$mainpage.hide(500);
+		randomTrip('kratom');
+		$plantpage.show(500);
+	});
+	$("#yopo").click(function() {
+		$mainpage.hide(500);
+		randomTrip('yopo');
+		$plantpage.show(500);
+	});
+	
+
+	/* reset after specific idle time */
+	var idleInterval = setInterval(timerIncrement, 60000);
+	$(this).mousemove(function (e) {
+		idleTime = 0;
+	});
+	$(this).keypress(function (e) {
+		idleTime = 0;
+	});
 });
+
+var idleTime = 0;
+function timerIncrement() {
+	idleTime = idleTime + 1;
+	if (idleTime > 5) {
+		window.location.reload();
+	}
+}
 </script>
 </body>
 </html>
