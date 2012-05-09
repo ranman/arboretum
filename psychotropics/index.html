@@ -1,121 +1,63 @@
 <!DOCTYPE html>
 <head>
-	<meta http-equiv=Content-Type content=text/html;charset=utf-8 />
-	<meta http-equiv=X-UA-Compatible content=IE=Edge;chrome=1 />
-	<!--<link rel="stylesheet" href="style.css">-->
-	<style type="text/css">
-#iboga,#kratom,#peyote,#yopo,#salvia {
-	width: 150px;
-	height: 150px;
-	background-color: white;
-}
-body {
-	background: #000;
-	position: relative;
-	width: 1280px;
-	height: 800px;
-	margin: 0 auto;
-	overflow: hidden;
-}
-#mainpage {
-	text-align: center;
-	width: 100%;
-	height: 100%;
-}
-#randomTripButton {
-	margin-top: 5%;
-	width: 20%;
-	height: 20%;
-	margin-bottom: 3em;
-}
-#otherButtons {
-	width: 100%;
-
-}
-#plantpage {
-	width: 100%;
-	height: 100%;
-	margin: 0 auto;
-	background-color: #123;
-	text-align: center;
-}
-#trip {
-	display: none;
-	text-align: justify;
-	margin: 0 auto;
-	padding-top: 10%;
-	width: 50%;
-	color: white;
-}
-#plant {
-	display: none;
-	margin: 0 auto;
-	padding-top: 5%;
-	width: 50%;
-	color: red;
-}
-#again {
-	display: none;
-	width: 80%;
-}
-#back {
-	display: none;
-	width: 80%;
-}
-	</style>
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8' />
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge;chrome=1' />
+	<link rel="stylesheet" href="style.css">
 	<script src="jquery-1.7.2.min.js"></script>
 	<script src="plants.json"></script>
 </head>
 <body>
-<section id=mainpage>
-	<button id=randomTripButton>Random</button>
-	<div id=otherButtons>
-		<button id=iboga><img src=images/iboga.png /></button>
-		<button id=kratom><img src=images/kratom.png /></button>
-		<button id=peyote><img src=images/peyote.png /></button>
-		<button id=salvia><img src=images/salvia.png /></button>
-		<button id=yopo><img src=images/yopo.png /></button>
+<section id='mainpage'>
+	<span id="headerText">Psychotropic Plants</span>
+	<button id='randomTripButton'>Click Here</button>
+	<div id='otherButtons'>
+		<button id='iboga'><img height=150 width=150 src='images/iboga.png' /></button>
+		<button id='kratom'><img height=150 width=150 src='images/kratom.png' /></button>
+		<button id='peyote'><img height=150 width=150 src='images/peyote.png' /></button>
+		<button id='salvia'><img height=150 width=150 src='images/salvia.png' /></button>
+		<button id='yopo'><img height=150 width=150 src='images/yopo.png' /></button>
 	</div>
 </section>
-<section id=plantpage class=hidden>
-	<div id=trip></div>
-	<div id=plant></div>
-	<button id=again>Again?</button>
-	<button id=back>Back?</button>
+<section id='plantpage' class='hidden'>
+	<div id='trip'></div>
+	<div id='plant'></div>
+	<button id='back'>Back?</button>
 </section>
 
-<script type=text/javascript>
-
+<script type='text/javascript'>
 $(function() {
 	var $mainpage = $("#mainpage");
 	var $plantpage = $("#plantpage");
 	var $trip = $("#trip");
 	var $plant = $("#plant");
-	var $again = $("#again");
 	var $back = $("#back");
-	var map = ['salvia','kratom','yopo','iboga','peyote'];
+	var plantMap = ['salvia','kratom','yopo','iboga','peyote'];
 	/* function to generate a mapping of plants to #s */
 	var randomPlant = function randomPlant() {
-		return map[Math.floor(Math.random() * map.length)];
+		return plantMap[Math.floor(Math.random() * plantMap.length)];
 	}
 	/* generate a random trip, removing them from the list after they're displayed */
 	var randomTrip = function randomTrip(plantStr) {
 		var plant = plants[plantStr];
 		var testimonial = plant.testimonials.pop();
-		if(testimonial === undefined) {
-			map.splice(map.indexOf(plantStr),1);
+		/* See if this is the last one */
+		if(plant.testimonials.length < 1) {
+			plantMap.splice(plantMap.indexOf(plantStr),1);
 			$("#"+plantStr).hide();
-			$back.click();
 		}
 		$trip.html(testimonial);
-		$trip.fadeIn(5000, function() {
-			$plant.html("<em>"+plant.species+"</em><p>"+plant.names.join(', ')+"<p>"+plant.long_desc+"<p>"+plant.short_desc);
-			$plant.slideDown('slow', function() {
-				$again.fadeIn();
-				$back.fadeIn();
+		$plant.html("<em>"+plant.species+"</em><p>"+plant.names.join(', ')+"<p>"+plant.long_desc+"<p>"+plant.short_desc);
+		$trip.children().each(function(index){
+			$(this).delay(4000*index).fadeIn(20*(this.innerHTML.length), function() {
+				if (index == $trip.children().length-1) {
+					$plant.delay(1000).slideDown('slow', function() {
+						$back.fadeIn();
+					});
+				}
 			});
 		});
 	};
+	
 	$("#randomTripButton").click(function() {
 		$mainpage.fadeOut(500);
 		randomTrip(randomPlant());
