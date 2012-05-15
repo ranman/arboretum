@@ -10,9 +10,8 @@
 <script type="text/javascript">
     kinesis = new Kinesis;
     Kinesis.cursor = movement;
-    function movement(position)
-    {
-        touchPoints[0] = {x : position.x, y : position.y};
+    function movement(position) {
+    	console.info(position.x, position.y, position.z);
     }
 </script>
 </head>
