@@ -5,6 +5,16 @@
 	<link rel="stylesheet" href="style.css">
 	<script src="jquery-1.7.2.min.js"></script>
 	<script src="plants.json"></script>
+	<link rel="stylesheet" type="text/css" href="http://cdn.kinesis.io/kinesis.css">
+	<script src="http://cdn.kinesis.io/kinesis-js-sdk.min.js"></script>
+	<script type="text/javascript">
+kinesis = new Kinesis;
+Kinesis.cursor = movement;
+function movement(position)
+{
+    touchPoints[0] = {x : position.x, y : position.y};
+}
+	</script>
 </head>
 <body>
 <section id='mainpage'>
