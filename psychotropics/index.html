@@ -42,7 +42,7 @@ $(function() {
 		return plantMap[Math.floor(Math.random() * plantMap.length)];
 	}
 	/* generate a random trip, removing them from the list after they're displayed */
-	var hidden = 0;
+	var hidden = 0; /* when this reaches 5 we reload the page */
 	var randomTrip = function randomTrip(plantStr) {
 		var plant = plants[plantStr];
 		var testimonial = plant.testimonials.pop();
