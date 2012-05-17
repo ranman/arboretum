@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<html>
 <head>
 	<meta http-equiv='Content-Type' content='text/html;charset=utf-8' />
 	<meta http-equiv='X-UA-Compatible' content='IE=Edge;chrome=1' />
+	<title>Psychotropics</title>
 	<link rel="stylesheet" href="style.css">
 	<script src="jquery-1.7.2.min.js"></script>
 	<script src="plants.json"></script>
@@ -40,6 +42,7 @@ $(function() {
 		return plantMap[Math.floor(Math.random() * plantMap.length)];
 	}
 	/* generate a random trip, removing them from the list after they're displayed */
+	var hidden = 0;
 	var randomTrip = function randomTrip(plantStr) {
 		var plant = plants[plantStr];
 		var testimonial = plant.testimonials.pop();
@@ -47,6 +50,9 @@ $(function() {
 		if(plant.testimonials.length < 1) {
 			plantMap.splice(plantMap.indexOf(plantStr),1);
 			$("#"+plantStr).hide();
+			if (++hidden == 5) {
+				window.location.reload();
+			}
 		}
 		$trip.html(testimonial);
 		$plant.html("<em>"+plant.species+"</em><p>"+plant.names.join(', ')+"<p>"+plant.long_desc+"<p>"+plant.short_desc);
@@ -68,7 +74,6 @@ $(function() {
 	});
 	$back.click(function() {
 		$plantpage.fadeOut(500);
-		$again.hide();
 		$back.hide();
 		$trip.html("").hide();
 		$plant.html("").hide();
@@ -114,7 +119,7 @@ $(function() {
 var idleTime = 0;
 function timerIncrement() {
 	idleTime = idleTime + 1;
-	if (idleTime > 5) {
+	if (idleTime > 3) {
 		window.location.reload();
 	}
 }
