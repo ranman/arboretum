@@ -1,0 +1,33 @@
+html {
+	overflow: hidden;
+	font-size: 100%;
+}
+body {
+	position: absolute;
+	margin: 0 auto;
+	width: 1280px;
+	height: 1024px;
+	background: url(images/bg.png) repeat left top;
+	text-align: center;
+	font-size: 18pt;
+	color: white;
+}
+#directive {
+	width: 70%;
+	margin: 0 auto;
+	font-size: 20pt;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+}
+.titleText {
+	font-family: cursive;
+	font-size: 60pt;
+	color: green;
+}
+.threatText {
+	color: orange;
+	font-size: 20pt;
+}
+button {
+	width: 150px;	
+	height: 150px;
+}
