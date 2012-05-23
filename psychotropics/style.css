@@ -50,9 +50,9 @@ table, td, tr {
 #trip {
 	text-align: justify;
 	margin: 0 auto;
-	padding-top: 5%;
-	width: 60%;
-	font-size: 20pt;
+	padding-top: 3%;
+	width: 70%;
+	font-size: 18pt;
 	color: white;
 }
 #trip > p {
@@ -61,8 +61,8 @@ table, td, tr {
 #plant {
 	display: none;
 	margin: 0 auto;
-	/*padding-top: 5%;*/
-	width: 50%;
+	padding-top: 5%;
+	width: 70%;
 	color: red;
 }
 #directive {

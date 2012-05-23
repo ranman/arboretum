@@ -56,7 +56,7 @@ $(function() {
 		var testimonial = plant.testimonials.pop();
 		/* See if this is the last one */
 		if(plant.testimonials.length < 1) {
-			plantMap.splice(plantMap.indexOf(plantStr),1);
+			plantMap.splice(plantMap.indexOf(plantStr), 1);
 			$("#"+plantStr).hide();
 			if (++hidden == 5) {
 				window.location.reload();
@@ -64,7 +64,7 @@ $(function() {
 		}
 		$trip.html(testimonial);
 		$plant.html("<em>"+plant.species+"</em><p>"+plant.names.join(', ')+"<p>"+plant.long_desc+"<p>"+plant.short_desc);
-		$trip.children().each(function(index){
+		$trip.children().each(function(index) {
 			$(this).delay(4000*index).fadeIn(20*(this.innerHTML.length), function() {
 				if (index == $trip.children().length-1) {
 					$plant.delay(1000).slideDown('slow', function() {
@@ -74,7 +74,6 @@ $(function() {
 			});
 		});
 	};
-	
 	$("#randomTripButton").click(function() {
 		$mainpage.fadeOut(500);
 		randomTrip(randomPlant());
@@ -83,7 +82,9 @@ $(function() {
 	$back.click(function() {
 		$plantpage.fadeOut(500);
 		$back.hide();
-		$trip.html("").hide();
+		$.each($trip.children(), function() {
+			$(this).html("").hide();
+		});
 		$plant.html("").hide();
 		$mainpage.fadeIn(500);
 	});
