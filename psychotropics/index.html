@@ -11,14 +11,25 @@
 <body>
 <section id='mainpage'>
 	<span id="headerText">Psychotropic Plants</span>
-	<button id='randomTripButton'>Click Here</button>
-	<div id='otherButtons'>
-		<button id='iboga'><img height=150 width=150 src='images/iboga.png' /></button>
-		<button id='kratom'><img height=150 width=150 src='images/kratom.png' /></button>
-		<button id='peyote'><img height=150 width=150 src='images/peyote.png' /></button>
-		<button id='salvia'><img height=150 width=150 src='images/salvia.png' /></button>
-		<button id='yopo'><img height=150 width=150 src='images/yopo.png' /></button>
-	</div>
+	<p id="directive">Click on Random or one of the plants below for a psychotropic experience</p>
+	<button id='randomTripButton'>Random</button>
+	<table id='otherButtons'>
+	<tr>
+		<td><button id='iboga'><img src='images/iboga.png' /></button></td>
+		<td><button id='kratom'><img src='images/kratom.png' /></button></td>
+		<td><button id='peyote'><img src='images/peyote.png' /></button></td>
+		<td><button id='salvia'><img src='images/salvia.png' /></button></td>
+		<td><button id='yopo'><img src='images/yopo.png' /></button></td>
+	</tr>
+	<tr>
+		<td>Iboga</td>
+		<td>Kratom</td>
+		<td>Peyote</td>
+		<td>Salvia</td>
+		<td>Yopo</td>
+		<td></td>
+	</tr>
+	</table>
 </section>
 <section id='plantpage' class='hidden'>
 	<div id='trip'></div>
